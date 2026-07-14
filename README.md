@@ -1,14 +1,89 @@
-> **2025 VSWIR-TIR Fundamentals to use Hyperspectral and Thermal NASA Earth Observations Workshop**  
->
-> Please view the [web-book](https://nasa.github.io/VITALS/) for workshop details. **Resources in the VITALS repository have been developed using the Openscapes 2i2c JupyterHub cloud workspace. For local python environment setup instructions please see the [Setup Instructions](setup/setup_instructions.md).
-
 # VITALS
 
-Welcome to the **VSWIR Imaging and Thermal Applications, Learning, and Science** Repository! This repository provides Python Jupyter notebooks to help users work with visible to short-wave infrared imaging spectroscopy data, thermal infrared data, and other products from the Earth Surface Mineral Dust Source Investigation (EMIT) and ECOsystem Spaceborne Thermal Radiometer Experiment on Space Station (ECOSTRESS) missions. The instruments overlapping fields of view provide an unprecedented opportunity to demonstrate the compounded benefits of working with both datasets.
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Python](https://img.shields.io/badge/python-3.13-blue.svg)](https://www.python.org/downloads/)
+[![Cite this repo](https://img.shields.io/badge/Cite-VITALS-blue)](https://github.com/nasa/VITALS/blob/main/CITATION.cff)
 
-In the interest of open science this repository has been made public but is still under active development. Make sure to consult the [CHANGE_LOG.md](https://github.com/nasa/VITALS/blob/post_agu_updates/CHANGE_LOG.md) for the most recent changes to the repository. Contributions from all parties are welcome.
+Welcome to the **VSWIR Imaging and Thermal Applications, Learning, and Science** Repository! This repository provides Python Jupyter notebooks to help users work with visible to short-wave infrared imaging spectroscopy data, thermal infrared data, and other related products from the Earth Surface Mineral Dust Source Investigation (EMIT) instrument, ECOsystem Spaceborne Thermal Radiometer Experiment on Space Station (ECOSTRESS) instrument, Plankton, Aerosol, Cloud, ocean Ecosystem (PACE) instrument, Airborne Visible InfraRed Imaging Spectromerter (AVIRIS-3) instrument, and the National Ecologial Observation Network (NEON) Imaging Spectrometer. 
 
----
+> **2025 VSWIR-TIR Fundamentals to use Hyperspectral and Thermal NASA Earth Observations Workshop**  
+>
+> Please view the [web-book](https://nasa.github.io/VITALS/) for workshop details.
+
+## Prerequisites/Setup Instructions  
+
+To run through the notebooks contained within the repository, please ensure you have the [prerequisites](/setup/prerequisites.md), then follow the [local setup instructions](/setup/setup_instructions.md)if not attending a workshop. If you are attending a workshop, please follow the [workshop setup instructions](/setup/workshop_setup.qmd)
+
+## Getting Started  
+Clone or download the [VITALS repository](https://github.com/nasa/VITALS).  
+
++ [Download](https://github.com/nasa/VITALS/archive/refs/heads/main.zip)
++ To clone the repository, type `git clone https://github.com/nasa/VITALS.git` in the command line.  
++ Set up a Python environment following the instructions in either the [local setup instructions](/setup/setup_instructions.md) or [workshop setup instructions](/setup/workshop_setup.qmd).
+
+## Table of Contents
+
+|Resource|Type|Summary|
+|:---|:---|:---|
+| **[Exploring EMIT L2A Reflectance](/python/Exploring_EMIT_L2A_RFL.ipynb)** | Jupyter Notebook | Search, access, and work with EMIT L2A Reflectance data |
+| **[Exploring ECOSTRESS L2T LSTE](/python/Exploring_ECOSTRESS_L2T_LSTE.ipynb)** | Jupyter Notebook | Search, access, and work with ECOSTRESS L2T Land Surface Temperature and Emissivity data |
+| **[Exploring PACE OCI L2 Surface Reflectance](/python/Exploring_PACE_OCI_L2_SFRFL.ipynb)** | Jupyter Notebook | Search, access, and work with PACE OCI L2 Surface Reflectance data |
+| **[Finding Coincident Airborne and Orbital Data](/python/Finding_Coincident_Airborne_and_Orbital_Data.ipynb)** | Jupyter Notebook | Find spatially and temporally coincident airborne and orbital data (EMIT, ECOSTRESS, AVIRIS-3) |
+| **EMIT & ECOSTRESS Tutorials** | | |
+| **[1. Finding Concurrent Data](/python/emit_ecostress/01_Finding_Concurrent_Data.ipynb)** | Jupyter Notebook | Search and filter for concurrent EMIT and ECOSTRESS data |
+| **[2. Working with EMIT Reflectance and ECOSTRESS LST](/python/emit_ecostress/02_Working_with_EMIT_Reflectance_and_ECOSTRESS_LST.ipynb)** | Jupyter Notebook | Streaming, Downloading and Co-Registering concurrent EMIT and ECOSTRESS data |
+| **[3. EMIT CWC from Reflectance](/python/emit_ecostress/03_EMIT_CWC_from_Reflectance.ipynb)** | Jupyter Notebook | Calculate Canopy Water Content from EMIT reflectance |
+| **[4. Dangermond Land Cover](/python/emit_ecostress/04_Dangermond_Land_Cover.ipynb)** | Jupyter Notebook | Canopy Water Content and Land Surface Temperature of Invasive Plants at Dangermond Preserve |
+| **[5. SB Vineyards](/python/emit_ecostress/05_SB_Vineyards.ipynb)** | Jupyter Notebook | Vineyard Vegetation Health using EMIT and ECOSTRESS data |
+| **EMIT & NEON Tutorials** | | |
+| **[1. Finding Co-located NEON EMIT Data](/python/emit_neon/01_Finding_Co-located_NEON_EMIT_Data_NIWO.ipynb)** | Jupyter Notebook | Find co-located NEON and EMIT reflectance data at Niwot Ridge |
+| **[2. Exploring NEON and EMIT Reflectance Data](/python/emit_neon/02_Exploring_NEON_and_EMIT_Reflectance_Data_NIWO.ipynb)** | Jupyter Notebook | Explore and compare NEON and EMIT reflectance data |
+| **PACE & EMIT Tutorials** | | |
+| **[1. Colocate PACE EMIT Data](/python/emit_pace/01_Colocate_PACE_EMIT_Data.ipynb)** | Jupyter Notebook | Find concurrent PACE and EMIT data |
+| **[2. Process PACE EMIT Data](/python/emit_pace/02_Process_PACE_EMIT_Data.ipynb)** | Jupyter Notebook | Align, resample, and process PACE and EMIT data |
+
+## Citation
+This repository is the product of a collaborative effort from several teams including the NASA Land Processes Distributed Active Archive Center (DAAC), NASA Jet Propulsion Laboratory, the National Ecological Observatory Network (NEON), NASA Ocean Biology DAAC, and NASA Oak Ridge National Laboratory DAAC. If you use this resource or an associated data product for your research, we appreciate a citation.
+
+[![Cite this repo](https://img.shields.io/badge/Cite-VITALS-blue)](https://github.com/nasa/VITALS/blob/main/CITATION.cff)
+
+For each data product used, you can retrieve a citation in your desired format from the product pages below.
+
+|Product|Product Page|Collection Shortname|
+|:---|:---|:---|
+|EMIT L2A Estimated Surface Reflectance and Uncertainty and Masks|https://doi.org/10.5067/EMIT/EMITL2ARFL.001|EMITL2ARFL|
+|ECOSTRESS Tiled Land Surface Temperature and Emissivity Instantaneous L2 Global 70 m|https://doi.org/10.5067/ECOSTRESS/ECO_L2T_LSTE.002|ECO_L2T_LSTE|
+|ECOSTRESS Tiled Evapotranspiration Instantaneous and Daytime L3 Global 70 m|https://doi.org/10.5067/ECOSTRESS/ECO_L3T_JET.002|ECO_L3T_JET|
+|PACE OCI Level-2 Regional Surface Reflectance Data|https://doi.org/10.5067/PACE/OCI/L2/SFREFL/3.1|PACE_OCI_L2_SFREFL|
+|AVIRIS-3 L2A Orthocorrected Surface Reflectance, Facility Instrument Collection|https://doi.org/10.3334/ORNLDAAC/2357|AV3_L2A_RFL_2357|
+|NEON Spectrometer Orthorectified Surface Bidirectional Reflectance - Mosaic|https://data.neonscience.org/data-products/DP3.30006.002|DP3.30006.002|
+
+## Contributors
+
+If you would like to contribute, please view our [contributing guide](CONTRIBUTING.md).
+
+[![Contributors](https://contrib.rocks/image?repo=nasa/vitals)](https://github.com/nasa/vitals/graphs/contributors)
+
+## Related Resources
+
+LP DAAC also develops and maintains additional resources, available at <https://github.com/nasa/LPDAAC-Data-Resources>. This landing repository provides general guides and tutorials, as well as links to mission-specific repositories that offer detailed guides, tutorials, how-tos, and scripts to help users find, access, and work with each mission’s data products.
+
+| GitHub Repository | Summary | Contents Description |
+|----|-----|----|
+|[AppEEARS Data Resources](https://github.com/nasa/AppEEARS-Data-Resources) |How to use the Application for Extracting and Exploring Analysis Ready Samples (AppEEARS) |Tutorials, AppEEARS API, Direct S3 Access |
+|[AppEEARS QGIS Plugin](https://github.com/nasa/AppEEARS-QGIS-Plugin)|Browse and load cloud-optimized geotiff output files from AppEEARS directly into QGIS|QGIS Plugin| 
+|[ECOSTRESS Data Resources](https://github.com/nasa/ECOSTRESS-Data-Resources)|How to find, access, and work with ECOSTRESS data (The ECOsystem Spaceborne Thermal Radiometer Experiment on Space Station)|Tutorials, Scripts, Direct S3 Access|
+|[EMIT Data Resources](https://github.com/nasa/EMIT-Data-Resources) |How to find, access, and work with EMIT data (Earth Surface Mineral Dust Source Investigation)|Tutorials, Scripts, Direct S3 Access |
+|[GEDI Data Resources](https://github.com/nasa/GEDI-Data-Resources) |How to find, access, and work with GEDI data (Global Ecosystem Dynamics Investigation)|Tutorials |
+|[HLS Data Resources](https://github.com/nasa/HLS-Data-Resources)|How to find, access, and work with HLS data (Harmonized Landsat Sentinel-2)|Tutorials, Scripts, Direct S3 Access|
+|[LPDAAC Data Resources](https://github.com/nasa/LPDAAC-Data-Resources)|How to find, access, and work with LPDAAC data |Tutorials, Scripts, Direct S3 Access|
+|[MODIS-VIIRS Data Resources](https://github.com/nasa/MODIS-VIIRS-Data-Resources)|How to find, access, and work with MODIS and VIIRS data|Tutorials|
+|[VITALS](https://github.com/nasa/VITALS)|How to find and work with EMIT and ECOSTRESS data together |Tutorials|
+
+### Other Helpful Links   
+
++ [NASA Earthdata Website](https://www.earthdata.nasa.gov/)
++ [LP DAAC Website](https://www.earthdata.nasa.gov/centers/lp-daac)
 
 ## Contact Info  
 
@@ -16,6 +91,5 @@ Email: <LPDAAC@usgs.gov>
 Voice: +1-866-573-3222  
 Organization: Land Processes Distributed Active Archive Center (LP DAAC)¹  
 Website: <https://www.earthdata.nasa.gov/centers/lp-daac>  
-Date last modified: 05-24-2024  
 
-¹Work performed under USGS contract 140G0121D0001 for NASA contract NNG14HH33I.  
+¹Work performed under USGS contract 140G0126D0001 for NASA contract NNG14HH33I.

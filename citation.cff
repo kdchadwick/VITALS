@@ -1,0 +1,119 @@
+cff-version: 1.2.0
+title: VITALS
+message: >-
+  If you use this collection of resources in your research
+  we would appreciate an appropriate citation.
+type: software
+authors:
+  - given-names: Erik A
+    family-names: Bolch
+    affiliation: >-
+      KBR, Inc., Contractor to the U.S. Geological Survey,
+      Earth Resources Observation and Science Center,
+      National Aeronautics and Space Administration Land
+      Processes Distributed Active Archive Center
+    orcid: 'https://orcid.org/0000-0003-2470-4048'
+  - given-names: Mahsa
+    family-names: Jami
+    affiliation: >-
+      KBR, Inc., Contractor to the U.S. Geological Survey,
+      Earth Resources Observation and Science Center,
+      National Aeronautics and Space Administration Land
+      Processes Distributed Active Archive Center
+    orcid: 'https://orcid.org/0000-0002-3594-3004'
+  - given-names: Christiana
+    family-names: Ade
+    affiliation: >-
+      Jet Propulsion Laboratory, California Institute of
+      Technology
+    orcid: 'https://orcid.org/0000-0001-6415-6774'
+  - given-names: K Dana
+    family-names: Chadwick
+    affiliation: >-
+      Jet Propulsion Laboratory, California Institute of
+      Technology
+    orcid: 'https://orcid.org/0000-0002-5633-4865'
+  - given-names: Claire
+    family-names: Villanueva-Weeks
+    affiliation: >-
+      Jet Propulsion Laboratory, California Institute of
+      Technology
+  - given-names: Marie
+    family-names: Johnson
+    affiliation: >- 
+      University of Montana   
+    orcid: 'https://orcid.org/0000-0002-7705-5670'
+  - given-names: Bridget
+    family-names: Hass
+    affiliation: >-
+      National Ecological Observatory Network
+    orcid: 'https://orcid.org/0000-0002-1538-9085'
+  - given-names: Skye
+    family-names: Caplan
+    affiliation: >-
+      Ocean Ecology Laboratory, NASA Goddard Space Flight Center; Science Systems and Applications, Inc.
+    orcid: 'https://orcid.org/0009-0004-8003-2551'
+  - given-names: Africa
+    family-names: Flores-Anderson
+    affiliation: >-
+      NASA Marshall Space Flight Center
+    orcid: 'https://orcid.org/0009-0008-2509-6439'
+  - given-names: Ayia
+    family-names: Lindquist
+    affiliation: >-
+      NASA Goddard Space Flight Center; Science Systems and Applications, Inc.
+  - given-names: Nathan
+    family-names: Roberts
+    affiliation: >-
+      KBR, Inc., Contractor to the U.S. Geological Survey,
+      Earth Resources Observation and Science Center,
+      National Aeronautics and Space Administration Land
+      Processes Distributed Active Archive Center
+    orcid: 'https://orcid.org/0000-0001-6625-671X'
+  - given-names: Niklas
+    family-names: Bohn
+    affiliation: >-
+      Jet Propulsion Laboratory, California Institute of
+      Technology
+    orcid: 'https://orcid.org/0000-0003-4078-886X'
+  - given-names: Gregory
+    family-names: Halverson
+    affiliation: >-
+      Jet Propulsion Laboratory, California Institute of
+      Technology
+    orcid: 'https://orcid.org/0000-0002-4028-4357'
+  - given-names: Philip G
+    family-names: Brodrick
+    affiliation: >-
+      Jet Propulsion Laboratory, California Institute of
+      Technology
+    orcid: 'https://orcid.org/0000-0001-9497-7661'
+  - given-names: Madeleine A.
+    family-names: Pascolini-Campbell
+    affiliation: >-
+      Jet Propulsion Laboratory, California Institute of
+      Technology
+    orcid: 'https://orcid.org/0000-0002-6449-0841'
+  - given-names: Aaron M.
+    family-names: Friesz
+    affiliation: >-
+      Earth Science Information Partners
+    orcid: 'https://orcid.org/0000-0003-4096-3824'
+  - given-names: Brianna
+    family-names: Lind
+    orcid: 'https://orcid.org/0000-0002-5306-9963'
+  - given-names: Cole K
+    family-names: Krehbiel
+    affiliation: >-
+      National Aeronautics and Space Administration Land
+      Processes Distributed Active Archive Center,
+      U.S. Geological Survey, Earth Resources 
+      Observation and Science Center
+    orcid: 'https://orcid.org/0000-0003-2645-3449'
+repository-code: 'https://github.com/nasa/VITALS'
+abstract: >-
+  This repository contains guides and Jupyter Notebooks designed
+  to help users find and fuse data from multiple instruments with
+  a focus on VSWIR and TIR data from ECOSTRESS, EMIT, AVIRIS-3,
+  PACE, and NEON.
+license: Apache-2.0
