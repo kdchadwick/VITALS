@@ -27,6 +27,8 @@ minimum_wavelength    : parabola-refined wavelength of an absorption minimum.
 feature_width_fwhm    : full-width at half the maximum feature depth.
 aloh_feature_metrics  : convenience wrapper returning position/depth/width for
                         the 2.1-2.25 um Al-OH feature.
+aloh_metrics_cube     : the same position/depth measurement applied to a whole
+                        image cube at once (vectorized; for per-pixel maps).
 DIAGNOSTIC_FEATURES   : dict of textbook diagnostic absorption positions.
 diagnostic_lookup     : map a USGS-splib entry name to its feature description.
 """
@@ -232,6 +234,108 @@ def aloh_feature_metrics(wavelengths, reflectance, wl_range=None):
         "band_depth": band_depth(w_um, reflectance, wl_range),
         "fwhm_um": feature_width_fwhm(w_um, reflectance, wl_range),
     }
+
+
+def aloh_metrics_cube(wavelengths, cube, wl_range=None, refine=True,
+                      min_valid_frac=0.8):
+    """Al-OH position and depth for **every pixel of an image cube**, vectorized.
+
+    This is the array-at-a-time equivalent of calling :func:`aloh_feature_metrics`
+    on each pixel of a cube: the same straight-line endpoint continuum and the
+    same 3-point parabolic vertex refinement, expressed as numpy operations over
+    all pixels simultaneously.
+
+    The scalar functions above remain the readable reference implementation and
+    are what the tutorial walks through pixel-by-pixel. This one exists because
+    the per-pixel Python loop does not scale: fitting a 420 x 420 airborne window
+    one pixel at a time takes minutes, while this returns in well under a second
+    -- the difference between a notebook cell you can run in front of an audience
+    and one you cannot.
+
+    Parameters
+    ----------
+    wavelengths : array-like, shape (n_bands,)
+        Wavelength axis in nm or um (converted internally).
+    cube : array-like, shape (..., n_bands)
+        Reflectance with the spectral axis LAST. Fill values should already be
+        NaN (not 0 or -9999).
+    wl_range : (lo, hi), optional
+        Feature window in micrometres. Defaults to :data:`ALOH_WINDOW_UM`.
+    refine : bool
+        Apply the parabolic sub-band refinement (as :func:`minimum_wavelength`).
+    min_valid_frac : float
+        Minimum fraction of finite samples inside the window for a pixel to be
+        measured at all. Pixels below it come back NaN.
+
+    Returns
+    -------
+    min_wavelength_um, band_depth : ndarray, each of shape ``cube.shape[:-1]``
+
+    Notes
+    -----
+    One deliberate difference from the scalar path: the scalar functions *drop*
+    non-finite samples before fitting, so their parabola can straddle a gap. Here
+    a pixel whose discrete minimum has a non-finite neighbour simply falls back to
+    the unrefined (discrete) minimum. Inside the 2.10-2.26 um window there are no
+    bad bands for either EMIT or AVIRIS, so in practice the two agree to the last
+    printed digit; the tutorial asserts that on a random sample of pixels.
+    """
+    if wl_range is None:
+        wl_range = ALOH_WINDOW_UM
+    w_all = to_micrometers(wavelengths)
+    order = np.argsort(w_all)
+    r = np.asarray(cube, dtype="float64")[..., order]
+    w_all = w_all[order]
+    keep_band = (w_all >= wl_range[0]) & (w_all <= wl_range[1])
+    w = w_all[keep_band]
+    r = r[..., keep_band]
+
+    shp, n = r.shape[:-1], w.size
+    pos_flat = np.full(int(np.prod(shp)) if shp else 1, np.nan)
+    dep_flat = np.full(pos_flat.size, np.nan)
+    if n < 3:
+        return pos_flat.reshape(shp), dep_flat.reshape(shp)
+
+    flat = r.reshape(-1, n)
+    ok = np.isfinite(flat)
+    enough = ok.sum(axis=1) >= max(3, int(np.ceil(min_valid_frac * n)))
+    idx = np.flatnonzero(enough)
+    if idx.size == 0:
+        return pos_flat.reshape(shp), dep_flat.reshape(shp)
+
+    f, o = flat[idx], ok[idx]
+    rows = np.arange(idx.size)
+    # Endpoint continuum between each pixel's FIRST and LAST finite sample.
+    i0 = np.argmax(o, axis=1)
+    i1 = n - 1 - np.argmax(o[:, ::-1], axis=1)
+    w0, w1 = w[i0], w[i1]
+    r0, r1 = f[rows, i0], f[rows, i1]
+    with np.errstate(invalid="ignore", divide="ignore"):
+        slope = (r1 - r0) / (w1 - w0)
+        cont = r0[:, None] + slope[:, None] * (w[None, :] - w0[:, None])
+        cont = np.where(cont <= 0, np.nan, cont)      # guard, as continuum_removed does
+        cr = f / cont
+
+    # Discrete minimum of the continuum-removed spectrum (+inf hides NaNs from argmin).
+    measurable = np.isfinite(cr).any(axis=1)
+    j = np.where(np.isfinite(cr), cr, np.inf).argmin(axis=1)
+    x = w[j].astype("float64")
+    depth = 1.0 - cr[rows, j]
+
+    if refine:
+        interior = measurable & (j > 0) & (j < n - 1)
+        if interior.any():
+            rr, jj = rows[interior], j[interior]
+            y0, y1, y2 = cr[rr, jj - 1], cr[rr, jj], cr[rr, jj + 1]
+            den = y0 - 2.0 * y1 + y2
+            with np.errstate(invalid="ignore", divide="ignore"):
+                delta = 0.5 * (y0 - y2) / np.where(den == 0, np.nan, den)
+            delta = np.where(np.isfinite(delta), delta, 0.0)   # gap/flat -> no shift
+            x[interior] = w[jj] + delta * (w[jj + 1] - w[jj - 1]) / 2.0
+
+    pos_flat[idx[measurable]] = x[measurable]
+    dep_flat[idx[measurable]] = depth[measurable]
+    return pos_flat.reshape(shp), dep_flat.reshape(shp)
 
 
 def bad_band_nan(wavelengths, reflectance, drop_ranges_um=None):
